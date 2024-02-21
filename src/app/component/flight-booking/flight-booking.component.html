@@ -1,0 +1,168 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="alert alert-success" *ngIf="bookingSuccess">
+        <strong>Success!</strong> Your flight has been booked successfully.
+      </div>
+    </div>
+    <div class="col-md-6 offset-md-3">
+      <div class="alert alert-danger" *ngIf="bookingFailure">
+        <strong>Fail!</strong> Your flight booking has failed.
+      </div>
+    </div>
+
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h3>Flight Booking</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="flightBookingForm" (ngSubmit)="onSubmit()">
+            <div class="form-group has-validation">
+              <label for="airline">Airline</label>
+              <select
+                class="form-control"
+                formControlName="airline"
+                id="airline"
+              >
+                <option value="">Select Airline</option>
+                <option value="Air India">Air India</option>
+                <option value="Indigo">Indigo</option>
+                <option value="SpiceJet">SpiceJet</option>
+                <option value="Vistara">Vistara</option>
+                <option value="GoAir">GoAir</option>
+              </select>
+              <div
+                *ngIf="submitted && flightBookingForm.get('airline')?.errors"
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="flightBookingForm.get('airline')?.errors?.['required']"
+                >
+                  Airline is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group has-validation">
+              <label for="arrivalDate">Arrival Date</label>
+              <input
+                type="date"
+                class="form-control"
+                formControlName="arrivalDate"
+                id="arrivalDate"
+                placeholder="Arrival Date"
+              />
+              <div
+                *ngIf="
+                  submitted && flightBookingForm.get('arrivalDate')?.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="flightBookingForm.get('arrivalDate')?.errors?.['required']"
+                >
+                  Arrival Date is required
+                </div>
+                <div
+                  *ngIf="flightBookingForm.get('arrivalDate')?.errors?.['arrivalDate']"
+                >
+                  Arrival Date is invalid
+                </div>
+              </div>
+            </div>
+            <div class="form-group has-validation">
+              <label for="arrivalTime">Arrival Time</label>
+              <input
+                type="time"
+                class="form-control"
+                formControlName="arrivalTime"
+                id="arrivalTime"
+                placeholder="Arrival Time"
+              />
+              <div
+                *ngIf="
+                  submitted && flightBookingForm.get('arrivalTime')?.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="flightBookingForm.get('arrivalTime')?.errors?.['required']"
+                >
+                  Arrival Time is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group has-validation">
+              <label for="flightNumber">Flight Number</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="flightNumber"
+                id="flightNumber"
+                placeholder="Flight Number"
+              />
+              <div
+                *ngIf="
+                  submitted && flightBookingForm.get('flightNumber')?.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="flightBookingForm.get('flightNumber')?.errors?.['required']"
+                >
+                  Flight Number is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group has-validation">
+              <label for="numOfGuests">Number of Guests</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="numOfGuests"
+                id="numOfGuests"
+                placeholder="Number of Guests"
+              />
+              <div
+                *ngIf="
+                  submitted && flightBookingForm.get('numOfGuests')?.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="flightBookingForm.get('numOfGuests')?.errors?.['required']"
+                >
+                  Number of Guests is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group has-validation">
+              <label for="comments">Comments</label>
+              <textarea
+                class="form-control"
+                formControlName="comments"
+                id="comments"
+                placeholder="Comments"
+              ></textarea>
+              <div
+                *ngIf="submitted && flightBookingForm.get('comments')?.errors"
+                class="invalid-feedback"
+              >
+                <div
+                  *ngIf="flightBookingForm.get('comments')?.errors?.['required']"
+                >
+                  Comments is required
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Book</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
